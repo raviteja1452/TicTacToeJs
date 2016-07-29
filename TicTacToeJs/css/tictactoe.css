@@ -1,0 +1,50 @@
+body{
+	width:100%;
+	height:100%;
+	padding:0px;
+	margin:0px;
+}
+.outer-box{
+	margin: 70px;
+    text-align: center;
+    padding : 30px;
+    border-radius: 10px;
+    border: 1px solid beige;
+    background-color: whitesmoke;
+}
+.tic-box{
+	display:inline-block;
+}
+.tic-head{
+	height: 50px;
+    padding-top: 30px;
+    text-align: center;
+    font-family: Helvetica;
+    font-size: 25px;
+    letter-spacing: 3px;
+    color: purple;
+}
+.tic-body{
+	height: 360px;
+	width:360px;
+    margin: 20px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 17px 2px rosybrown;
+}
+.tic-output{
+	height: 50px;
+    padding-top: 25px;
+    font-family: Helvetica;
+    color: steelblue;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    border: 1px solid crimson;
+}
+.tic-item{
+	height:120px;
+	width:120px;
+	display:inline-block;
+}
+.active{
+
+}
