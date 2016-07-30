@@ -3,7 +3,7 @@
  
  Sample Pictures
 
- ![Start Picture](https://github.com/raviteja1452/TicTacToeJs/tree/master/start.png)
+ ![Start Picture](https://github.com/raviteja1452/TicTacToeJs/blob/tree/master/start.png)
 
- ![Progress Picture](https://github.com/raviteja1452/TicTacToeJs/tree/master/progress.png)
+ ![Progress Picture](https://github.com/raviteja1452/TicTacToeJs/blob/master/progress.png)
 
