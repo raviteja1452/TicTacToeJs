@@ -1,3 +1,93 @@
 $(document).ready(function(){
-
+	TicTacToe();
+	$('.tic-item').on('click',function(){
+		var id = $(this).attr('id');
+		Game(id);
+	});
 });
+
+// All win positions in 3*3 TicTacToe
+var winPositions = [
+	[0,1,2],
+	[3,4,5],
+	[6,7,8],
+	[0,3,6],
+	[1,4,7],
+	[2,5,8],
+	[0,4,8],
+	[2,4,6]
+];
+
+// Board Representation
+var board = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
+
+// Tic Tac Toe Start Function 
+var current_player;
+function TicTacToe(){
+	// Initialising the First Player as X
+	current_player = 'X';
+	var output = current_player+"'s Turn ";
+	$('.tic-output').html("Game Started , "+output);
+}
+// Game Functionality
+
+function Game(id){
+	var no = parseInt(id[1]);
+	if(board[no] == ' '){
+		board[no] = current_player;
+		$('#'+id).html(current_player);
+		if(current_player == 'X'){
+			$('#'+id).addClass('royal');
+		}
+		if(!GameOver()){
+			swapPlayer();
+		}
+	}else{
+		var output = current_player+"'s Turn ";
+		$('.tic-output').html(output+"<br/> Insert in Positions where pieces are not inserted");	
+	}
+}
+function swapPlayer(){
+	if(current_player == 'X'){
+		current_player  = 'O';
+	}else{
+		current_player = 'X';
+	}
+}
+// Board Functionality
+function GameOver(){
+	return (FoundWinner()||NoMovesLeft());
+}
+function NoMovesLeft(){
+	for(id in board){
+		if(board[id] == ' '){
+			return 0;
+		}
+	}
+	$('.tic-output').html("Pchh, No moves left :(");
+	return 1;
+}
+function FoundWinner(){
+	for(id in winPositions){
+		if((board[winPositions[id][0]] != ' ' ) &&( board[winPositions[id][0]] == board[winPositions[id][1]] == board[winPositions[id][2]]))
+		{
+			$('.tic-output').html("Hurray, "+current_player+" is the winner");	
+			return 1;
+		}
+	}
+	return 0;
+}
+
+// Player Functionality
+
+function Move(){
+	return GetMove();
+}
+function GetMove(){
+	$('.tic-item').on('click',function(){
+
+	});
+}
+function MakeMove(){
+
+}
