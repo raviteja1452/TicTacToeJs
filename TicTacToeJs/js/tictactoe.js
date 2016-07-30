@@ -1,3 +1,5 @@
+// TicTacToe RationalScripts
+
 $(document).ready(function(){
 	TicTacToe();
 	$('.tic-item').on('click',function(){
@@ -53,6 +55,8 @@ function swapPlayer(){
 	}else{
 		current_player = 'X';
 	}
+	var output = current_player+"'s Turn ";
+	$('.tic-output').html(output);
 }
 // Board Functionality
 function GameOver(){
@@ -64,13 +68,15 @@ function NoMovesLeft(){
 			return 0;
 		}
 	}
+	$('.tic-output').css('background-color','tan');
 	$('.tic-output').html("Pchh, No moves left :(");
 	return 1;
 }
 function FoundWinner(){
 	for(id in winPositions){
-		if((board[winPositions[id][0]] != ' ' ) &&( board[winPositions[id][0]] == board[winPositions[id][1]] == board[winPositions[id][2]]))
+		if((board[winPositions[id][0]] != ' ' ) &&( board[winPositions[id][0]] == board[winPositions[id][1]]) && (board[winPositions[id][1]] == board[winPositions[id][2]]))
 		{
+			$('.tic-output').css('background-color','yellowgreen');
 			$('.tic-output').html("Hurray, "+current_player+" is the winner");	
 			return 1;
 		}
@@ -78,16 +84,5 @@ function FoundWinner(){
 	return 0;
 }
 
-// Player Functionality
 
-function Move(){
-	return GetMove();
-}
-function GetMove(){
-	$('.tic-item').on('click',function(){
 
-	});
-}
-function MakeMove(){
-
-}
