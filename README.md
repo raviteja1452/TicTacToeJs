@@ -1,5 +1,5 @@
  --Basic TicTacToe Game with Javascript implementation. 
- -- Multi Player game with no AI involved.
+ -- Multi Player game with AI involved.
  
  Sample Pictures
 
@@ -32,6 +32,8 @@
 
 11) Add a Seperate Index Page at the beginning
 
-
-
+                                         Tic Tac Toe Js              
+                                         
+                                         
+                                         #RationalScripts
 
