@@ -10,27 +10,30 @@
  
  To Do Tasks:
  
-1) Chage the Design of TicTacToe, Make it smoother
 
-2) Add Two Divisions, One for Score and Another for Game
+1) Create a Index Page with Two links, one pointing Two Player game and Another Pointing Single Player game
 
-3) Add Play and Quit Options
+2) Chage the Design of TicTacToe, Make it smoother
 
-4) Add Choosing the Level Option
+3) Add Two Divisions, One for Score and Another for Game
 
-5) Add Continue option after completion of a level as well quit.
+4) Add Play and Quit Options
 
-6) Add Play Again and Quit options after loss
+5) Add Choosing the Level Option
 
-7) Add AI to the Algorithm -- Minimax
+6) Add Continue option after completion of a level as well quit.
 
-8) Add Alpha Beta Pruning
+7) Add Play Again and Quit options after loss
 
-9) Add Leveling 
+8) Add AI to the Algorithm -- Minimax
 
-10) Make the Design better
+9) Add Alpha Beta Pruning
 
-11) Add a Seperate Index Page at the beginning
+10) Add Leveling 
+
+11) Make the Design better
+
+12) Add a Seperate Index Page at the beginning
 
                                          Tic Tac Toe Js              
                                          
