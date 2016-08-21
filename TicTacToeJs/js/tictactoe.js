@@ -1,7 +1,11 @@
 // TicTacToe RationalScripts
 
 $(document).ready(function(){
-
+	$(document).on('click','.tic-item',function(){
+		var id = $(this).attr('id');
+		console.log(id);
+		Game(id);
+	});
 	$('#ttt').on('click',function(){
 		$('#single').css('display','inline-block');
 		$('#multi').css('display','inline-block');
@@ -74,16 +78,13 @@ $(document).ready(function(){
 		ticBoard(5);
 		TicTacToe();
 	});
-	// $('.tic-item').on('click',function(){
-	// 	var id = $(this).attr('id');
-	// 	Game(id);
-	// });
 });
 
 // Board Calling creation is done on view as well for evaluation part
 
-var board;
+var board,size;
 function ticBoard(size){
+	size = size;
 	var content = ''
 	// Creating a board
 	board = new Array(size);
@@ -97,7 +98,6 @@ function ticBoard(size){
 		content = content+'</div>'
 	}
 	$('.tic-body').html(content);
-	console.log(board);
 }
 
 // Code for MultiPlayer
@@ -114,9 +114,10 @@ function TicTacToe(){
 // Game Functionality
 
 function Game(id){
-	var no = parseInt(id[1]);
-	if(board[no] == ' '){
-		board[no] = current_player;
+	var rno = parseInt(id[1]);
+	var cno = parseInt(id[3]);
+	if(board[rno][cno] == '_'){
+		board[rno][cno] = current_player;
 		$('#'+id).html(current_player);
 		if(current_player == 'X'){
 			$('#'+id).addClass('royal');
@@ -140,24 +141,70 @@ function swapPlayer(){
 }
 // Board Functionality
 function GameOver(){
-	return (FoundWinner()||NoMovesLeft());
+	return (Evaluation()||NoMovesLeft());
 }
 function NoMovesLeft(){
-	for(id in board){
-		if(board[id] == ' '){
-			return 0;
+	for(i = 0 ; i < size ; i++){
+		for(j = 0;j<size;j++){
+			if(board[i][j] == '_'){
+				return false;
+			}
 		}
 	}
 	$('.tic-output').css('background-color','tan');
 	$('.tic-output').html("Pchh, No moves left :(");
 	return 1;
 }
-function FoundWinner(){
-	for(id in winPositions){
-		if((board[winPositions[id][0]] != ' ' ) &&( board[winPositions[id][0]] == board[winPositions[id][1]]) && (board[winPositions[id][1]] == board[winPositions[id][2]]))
-		{
-			$('.tic-output').css('background-color','yellowgreen');
-			$('.tic-output').html("Hurray, "+current_player+" is the winner");	
+function Evaluation(){
+	// Row Checking
+	for(i = 0;i < size ;i++){
+		if(board[i][0] != '_'){
+			var j = 1;
+			for(j = 1 ; j < size ; j++){
+				if(board[i][j] != board[i][j-1]){
+					break;
+				}
+			}
+			if(j == size){
+				return 1;
+			}
+		}
+	}
+	// Coloumn Checking
+	for(i = 0;i < size ;i++){
+		if(board[0][i] != '_'){
+			var j = 1;
+			for(j = 1 ; j < size ; j++){
+				if(board[j][i] != board[j-1][i]){
+					break;
+				}
+			}
+			if(j == size){
+				return 1;
+			}
+		}
+	}
+	// Diagonal 1 
+	if(board[0][0]!='_'){
+		var i = 0;
+		for(i = 1; i< size; i++){
+			if(board[i][i] != board[i-1][i-1]){
+				break;
+			}
+		}
+		if(i == size){
+			return 1;
+		}
+	}
+	// Diagonal 2
+	if(board[0][size-1]!='_'){
+		var i = 0;
+		for(i = 1; i < size; i++){
+			if(board[i][size-1 - i] != board[i-1][size - i]){
+				break;
+			}
+		}
+		if(i == size){
 			return 1;
 		}
 	}
