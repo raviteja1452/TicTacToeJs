@@ -276,6 +276,7 @@ body{
     display:none;
     text-align:center;
     height:720px;
+    padding-top:50px;
 }
 .tic-box{
     display:inline-block;

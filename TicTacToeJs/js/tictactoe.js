@@ -38,68 +38,73 @@ $(document).ready(function(){
 	});
 	$('#s3').on('click',function(){
 		$('.tic-block').show();
+		$('.tic-head').html('Single Player Tic-Tac-Toe');
 		ticBoard(3);
-		$('.tic-block').focus();
+		TicTacToe();
 	});
 	$('#s4').on('click',function(){
 		$('.tic-block').show();
+		$('.tic-head').html('Single Player Tic-Tac-Toe');
 		ticBoard(4);
+		TicTacToe();
 		
 	});
 	$('#s5').on('click',function(){
 		$('.tic-block').show();
+		$('.tic-head').html('Single Player Tic-Tac-Toe');
 		ticBoard(5);
+		TicTacToe();
 	});
 	$('#m3').on('click',function(){
 		$('.tic-block').show();
+		$('.tic-head').html('Multi Player Tic-Tac-Toe');
 		ticBoard(3);
+		TicTacToe();
 
 	});
 	$('#m4').on('click',function(){
 		$('.tic-block').show();
+		$('.tic-head').html('Multi Player Tic-Tac-Toe');
 		ticBoard(4);
+		TicTacToe();
 	});
 	$('#m5').on('click',function(){
 		$('.tic-block').show();
+		$('.tic-head').html('Multi Player Tic-Tac-Toe');
 		ticBoard(5);
+		TicTacToe();
 	});
-	// TicTacToe();
 	// $('.tic-item').on('click',function(){
 	// 	var id = $(this).attr('id');
 	// 	Game(id);
 	// });
 });
 
+// Board Calling creation is done on view as well for evaluation part
+
+var board;
 function ticBoard(size){
 	var content = ''
+	// Creating a board
+	board = new Array(size);
 	for(var i=0;i<size;i++){
 		content = content+'<div class="tic-row" id="tr'+i+'">'
+		board[i] = new Array(size);
 		for(var j=0;j < size;j++){
 			content = content + '<div class="tic-item" id="r'+i+'c'+j+'"></div>';
+			board[i][j] = '_';
 		}
 		content = content+'</div>'
 	}
 	$('.tic-body').html(content);
+	console.log(board);
 }
 
 // Code for MultiPlayer
-All win positions in 3*3 TicTacToe
-var winPositions = [
-	[0,1,2],
-	[3,4,5],
-	[6,7,8],
-	[0,3,6],
-	[1,4,7],
-	[2,5,8],
-	[0,4,8],
-	[2,4,6]
-];
-
-// Board Representation
-var board = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
 
 // Tic Tac Toe Start Function 
 var current_player;
+
 function TicTacToe(){
 	// Initialising the First Player as X
 	current_player = 'X';
