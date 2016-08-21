@@ -10,7 +10,32 @@ $(document).ready(function(){
 		$('#h2').css('display','inline-block');
 		$('#r1').css('display','inline-block');
 
-	})
+	});
+	$('#single').on('click',function(){
+		$('#v2').css('display','inline-block');
+		$('#v4').css('display','inline-block');
+		$('#v6').css('display','inline-block');
+		$('#v7').css('display','inline-block');
+		$('#h3').css('display','inline-block');
+		$('#h4').css('display','inline-block');
+		$('#r2').css('display','inline-block');
+		$('#s3').css('display','inline-block');
+		$('#s4').css('display','inline-block');
+		$('#s5').css('display','inline-block');
+
+	});
+	$('#multi').on('click',function(){
+		$('#v3').css('display','inline-block');
+		$('#v5').css('display','inline-block');
+		$('#v8').css('display','inline-block');
+		$('#v9').css('display','inline-block');
+		$('#h5').css('display','inline-block');
+		$('#h6').css('display','inline-block');
+		$('#r3').css('display','inline-block');
+		$('#m3').css('display','inline-block');
+		$('#m4').css('display','inline-block');
+		$('#m5').css('display','inline-block');
+	});
 	// TicTacToe();
 	// $('.tic-item').on('click',function(){
 	// 	var id = $(this).attr('id');

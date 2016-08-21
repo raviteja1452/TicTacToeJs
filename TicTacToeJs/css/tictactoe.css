@@ -152,6 +152,126 @@ body{
     top: 339px;
     left: 706px;
 }
+#v2{
+    display:none;
+    position: absolute;
+    left: 428px;
+    top: 362px;
+}
+#v3{
+    display:none;
+    position: absolute;
+    left: 868px;
+    top: 362px;
+}
+#r2{
+    display:none;
+    left: 394px;
+    top: 475px;
+    position: absolute;
+}
+#r3{
+    display:none;
+    left: 834px;
+    top: 475px;
+    position: absolute;
+}
+#v4{
+    display:none;
+    position: absolute;
+    top: 561px;
+    left: 428px;
+}
+#v5{
+    display:none;
+    position: absolute;
+    top: 561px;
+    left: 868px;
+}
+#s4{
+    display:none;
+    position: absolute;
+    top: 661px;
+    left: 404px;
+}
+#m4{
+    display:none;
+    position: absolute;
+    top: 661px;
+    left: 844px;
+}
+#h3{
+    display:none;
+    position: absolute;
+    top: 509px;
+    left: 280px;
+}
+#h4{
+    display:none;
+    position: absolute;
+    top: 509px;
+    left: 479px;
+}
+#h5{
+    display:none;
+    position: absolute;
+    top: 509px;
+    left: 722px;
+}
+#h6{
+    display:none;
+    position: absolute;
+    top: 509px;
+    left: 918px;
+}
+#v6{
+    display:none;
+    position: absolute;
+    top: 510px;
+    left: 279px;
+}
+#v7{
+    display:none;
+    position: absolute;
+    top: 510px;
+    left: 577px;
+}
+#v8{
+    display:none;
+    position: absolute;
+    top: 510px;
+    left: 720px;
+}
+#v9{
+    display:none;
+    position: absolute;
+    top: 510px;
+    left: 1015px;
+}
+#s3{
+    display:none;
+    position: absolute;
+    top: 609px;
+    left: 254px;
+}
+#m3{
+    display:none;
+    position: absolute;
+    top: 609px;
+    left: 695px;
+}
+#s5{
+    display:none;
+    position: absolute;
+    top: 609px;
+    left: 554px;
+}
+#m5{
+    display:none;
+    position: absolute;
+    top: 609px;
+    left: 991px;
+}
 /* Main Page Css*/
 
 
