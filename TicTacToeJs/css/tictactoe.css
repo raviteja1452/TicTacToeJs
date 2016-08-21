@@ -272,6 +272,66 @@ body{
     top: 609px;
     left: 991px;
 }
+.tic-block{
+    display:none;
+    text-align:center;
+    height:720px;
+}
+.tic-box{
+    display:inline-block;
+}
+.tic-head{
+    height: 50px;
+    text-align: center;
+    font-family: Helvetica;
+    font-size: 25px;
+    letter-spacing: 3px;
+    color: purple;
+}
+.tic-body{
+    margin: 20px;
+    padding:15px;
+    border-radius: 6px;
+    text-align: center;
+}
+.tic-output{
+    text-align: center;
+    height: 40px;
+    padding-top: 25px;
+    font-family: Helvetica;
+    color: steelblue;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    background: white;
+    border: 2px dotted crimson;
+}
+.tic-item{
+    width: 60px;
+    padding: 5px;
+    height: 60px;
+    display: inline-block;
+    font-size: 40px;
+    line-height:60px;
+    font-family: Helvetica;
+    color: goldenrod;
+    vertical-align: top;
+    background-color: whitesmoke;
+    margin: 10px;
+    border: 2px solid #3c948b;
+}
+.tic-item:hover{
+    background-color: #fce014;
+}
+.active{
+
+}
+.royal{
+    color: #990000;
+}
+a{
+    text-decoration: none;
+    color:inherit;
+}
 /* Main Page Css*/
 
 
@@ -302,54 +362,5 @@ body{
     border: 1px solid beige;
     background-color: whitesmoke;
 }
-.tic-box{
-	display:inline-block;
-}
-.tic-head{
-	height: 50px;
-    text-align: center;
-    font-family: Helvetica;
-    font-size: 25px;
-    letter-spacing: 3px;
-    color: purple;
-}
-.tic-body{
-    width: 360px;
-    margin: 20px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border-radius: 6px;
-    text-align: center;
-    background-color: lightgoldenrodyellow;
-    box-shadow: 2px 2px 17px 2px rosybrown;
-}
-.tic-output{
-	height: 40px;
-    padding-top: 25px;
-    font-family: Helvetica;
-    color: steelblue;
-    letter-spacing: 1px;
-    border-radius: 5px;
-    background: white;
-    border: 2px dotted crimson;
-}
-.tic-item{
-	width: 60px;
-    padding: 10px;
-    height: 60px;
-    display: inline-block;
-    border-radius: 9px;
-    font-size: 50px;
-    font-family: Helvetica;
-    color: goldenrod;
-    vertical-align: top;
-    background-color: whitesmoke;
-    margin: 13px;
-    box-shadow: 0px 0px 19px 1px green;
-}
-.active{
 
-}
-.royal{
-    color: royalblue;
-}*/
+*/
