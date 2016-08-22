@@ -2,9 +2,13 @@
 
 $(document).ready(function(){
 	$(document).on('click','.tic-item',function(){
-		var id = $(this).attr('id');
-		console.log(id);
-		Game(id);
+		if(!Evaluation()){
+			var id = $(this).attr('id');
+			Game(id);
+		}else{
+			ticBoard(Size);
+			TicTacToe();
+		}
 	});
 	$('#ttt').on('click',function(){
 		$('#single').css('display','inline-block');
@@ -82,9 +86,10 @@ $(document).ready(function(){
 
 // Board Calling creation is done on view as well for evaluation part
 
-var board,size;
+var board = 0;
+var Size = 0;
 function ticBoard(size){
-	size = size;
+	Size = size;
 	var content = ''
 	// Creating a board
 	board = new Array(size);
@@ -109,6 +114,7 @@ function TicTacToe(){
 	// Initialising the First Player as X
 	current_player = 'X';
 	var output = current_player+"'s Turn ";
+	$('.tic-output').css('background-color','white');
 	$('.tic-output').html("Game Started , "+output);
 }
 // Game Functionality
@@ -126,6 +132,7 @@ function Game(id){
 			swapPlayer();
 		}
 	}else{
+		$('.tic-output').css('background-color','white');
 		var output = current_player+"'s Turn ";
 		$('.tic-output').html(output+"<br/> Insert in Positions where pieces are not inserted");	
 	}
@@ -137,17 +144,24 @@ function swapPlayer(){
 		current_player = 'X';
 	}
 	var output = current_player+"'s Turn ";
+	$('.tic-output').css('background-color','white');
 	$('.tic-output').html(output);
 }
 // Board Functionality
 function GameOver(){
+	if(Evaluation() == 1){
+		$('.tic-output').css('background-color','green');
+		$('.tic-output').html("You are the Winner");
+	}
+	//console.log(NoMovesLeft());
 	return (Evaluation()||NoMovesLeft());
 }
 function NoMovesLeft(){
-	for(i = 0 ; i < size ; i++){
-		for(j = 0;j<size;j++){
+	//console.log(Size);
+	for(i = 0 ; i < Size ; i++){
+		for(j = 0;j< Size;j++){
 			if(board[i][j] == '_'){
-				return false;
+				return 0;
 			}
 		}
 	}
@@ -157,29 +171,30 @@ function NoMovesLeft(){
 }
 function Evaluation(){
 	// Row Checking
-	for(i = 0;i < size ;i++){
+	//console.log("Evaluate :"+Size);
+	for(i = 0;i < Size ;i++){
 		if(board[i][0] != '_'){
 			var j = 1;
-			for(j = 1 ; j < size ; j++){
+			for(j = 1 ; j < Size ; j++){
 				if(board[i][j] != board[i][j-1]){
 					break;
 				}
 			}
-			if(j == size){
+			if(j == Size){
 				return 1;
 			}
 		}
 	}
 	// Coloumn Checking
-	for(i = 0;i < size ;i++){
+	for(i = 0;i < Size ;i++){
 		if(board[0][i] != '_'){
 			var j = 1;
-			for(j = 1 ; j < size ; j++){
+			for(j = 1 ; j < Size ; j++){
 				if(board[j][i] != board[j-1][i]){
 					break;
 				}
 			}
-			if(j == size){
+			if(j == Size){
 				return 1;
 			}
 		}
@@ -187,24 +202,24 @@ function Evaluation(){
 	// Diagonal 1 
 	if(board[0][0]!='_'){
 		var i = 0;
-		for(i = 1; i< size; i++){
+		for(i = 1; i< Size; i++){
 			if(board[i][i] != board[i-1][i-1]){
 				break;
 			}
 		}
-		if(i == size){
+		if(i == Size){
 			return 1;
 		}
 	}
 	// Diagonal 2
-	if(board[0][size-1]!='_'){
+	if(board[0][Size-1]!='_'){
 		var i = 0;
-		for(i = 1; i < size; i++){
-			if(board[i][size-1 - i] != board[i-1][size - i]){
+		for(i = 1; i < Size; i++){
+			if(board[i][Size-1 - i] != board[i-1][Size - i]){
 				break;
 			}
 		}
-		if(i == size){
+		if(i == Size){
 			return 1;
 		}
 	}
