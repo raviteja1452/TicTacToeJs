@@ -192,7 +192,7 @@ body{
     display:none;
     position: absolute;
     top: 661px;
-    left: 404px;
+    left: 359px;
 }
 #m4{
     display:none;
@@ -252,7 +252,7 @@ body{
     display:none;
     position: absolute;
     top: 609px;
-    left: 254px;
+    left: 226px;
 }
 #m3{
     display:none;
@@ -264,7 +264,7 @@ body{
     display:none;
     position: absolute;
     top: 609px;
-    left: 554px;
+    left: 525px;
 }
 #m5{
     display:none;
@@ -297,16 +297,16 @@ body{
 }
 .tic-output{
     text-align: center;
-    height: 40px;
-    padding-top: 25px;
+    padding: 20px;
     font-family: Helvetica;
     color: steelblue;
     letter-spacing: 1px;
     border-radius: 5px;
+    line-height: 1.5;
     background: white;
     border: 2px dotted crimson;
 }
-.tic-item{
+.tic-item-m,.tic-item-s{
     width: 60px;
     padding: 5px;
     height: 60px;

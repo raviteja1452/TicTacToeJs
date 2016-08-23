@@ -1,6 +1,17 @@
 // TicTacToe RationalScripts
 
 $(document).ready(function(){
+
+	$(document).on('click','.tic-item-s',function(){
+		if(!EvaluationSingle()){
+			var id = $(this).attr('id');
+			GameSingle(id);
+		}else{
+			initiateGame(Size,1);
+		}
+	});
+
+
 	$(document).on('click','.tic-item-m',function(){
 		if(!Evaluation()){
 			var id = $(this).attr('id');
@@ -9,14 +20,7 @@ $(document).ready(function(){
 			initiateGame(Size,2);
 		}
 	});
-	$(document).on('click','tic-item-s',function(){
-		if(!EvaluationSingle()){
-			var id = $(this).attr('id');
-			GameSinge(id);
-		}else{
-			initiateGame(Size,1);
-		}
-	});
+
 	$('#ttt').on('click',function(){
 		$('#single').css('display','inline-block');
 		$('#multi').css('display','inline-block');
@@ -52,23 +56,27 @@ $(document).ready(function(){
 		$('#m5').css('display','inline-block');
 	});
 	$('#s3').on('click',function(){
-		initiateGame(3,1)
+		Hardness = 3;
+		initiateGame(3,1);
 	});
 	$('#s4').on('click',function(){
-		initiateGame(4,1)
+		Hardness = 5;
+		initiateGame(3,1);
+		
 	});
 	$('#s5').on('click',function(){
-		initiateGame(5,1)
+		Hardness = 7;
+		initiateGame(3,1);
 	});
 	$('#m3').on('click',function(){
-		initiateGame(3,2)
+		initiateGame(3,2);
 
 	});
 	$('#m4').on('click',function(){
-		initiateGame(4,2)
+		initiateGame(4,2);
 	});
 	$('#m5').on('click',function(){
-		initiateGame(5,2)
+		initiateGame(5,2);
 	});
 	$('#play-again').on('click',function(){
 		initiateGame(Size,Type);
@@ -78,18 +86,28 @@ $(document).ready(function(){
 var board = 0;
 var Size = 0;
 var Type = 0;
+var Hardness = 3;
 function initiateGame(s,type){
 	Type = type;
 	$('.tic-block').show();
 	var word = '';
 	if(type == 1){
 		word+='Single Player';
+		if(Hardness == 3){
+			word+=' EASY '
+		}
+		if(Hardness == 5){
+			word+=' MEDIUM '
+		}
+		if(Hardness == 7){
+			word+=' HARD '
+		}
 	}else{
 		word+='Multi Player';
 	}
 	$('.tic-head').html(word+' Tic-Tac-Toe');
 	ticBoard(s,type);
-	TicTacToe();
+	TicTacToe(type);
 }
 // Board Calling creation is done on view as well for evaluation part
 
@@ -119,10 +137,14 @@ function ticBoard(size,type){
 // Tic Tac Toe Start Function 
 var current_player;
 
-function TicTacToe(){
+function TicTacToe(type){
 	// Initialising the First Player as X
 	current_player = 'X';
-	var output = current_player+"'s Turn ";
+	var output = "";
+	if(type == 1){
+		output+=" Yours is X, Computers is O <br/>";
+	}
+	output += current_player+"'s Turn ";
 	$('.tic-output').css('background-color','white');
 	$('.tic-output').html("Game Started , "+output);
 }
@@ -314,7 +336,7 @@ function EvaluationSingle(){
 			}
 		}
 		if(i == Size){
-			if(board[0][size -1 ] == 'X'){
+			if(board[0][Size -1 ] == 'X'){
 				return 10;
 			}else{
 				return -10;
@@ -329,11 +351,15 @@ function GameSingle(id){
 	var cno = parseInt(id[3]);
 	if(board[rno][cno] == '_'){
 		board[rno][cno] = current_player;
+		$('#'+id).html(current_player);
 		if(current_player == 'X'){
 			$('#'+id).addClass('royal');
 		}
 		if(!GameOverSingle()){
 			swapPlayer();
+			if(current_player == 'O'){
+				computerPick(Hardness);
+			}
 		}
 	}else{
 		$('.tic-output').css('background-color','white');
@@ -354,3 +380,78 @@ function GameOverSingle(){
 	//console.log(NoMovesLeft());
 	return (EvaluationSingle()||NoMovesLeft());
 }
+
+// AI Code
+
+function computerPick(depth){
+	var bestVal = 1000;
+	var alpha = -1000;
+	var beta = 1000;
+	var row = 0;
+	var col = 0;
+	for(var i = 0;i< Size;i++){
+		for(var j = 0;j< Size;j++){
+			if(board[i][j] == '_'){
+				board[i][j] = 'O';
+				var moveVal = miniMax(0,depth,true);
+				board[i][j] = '_';
+				if(moveVal < bestVal){
+					row = i;
+					col = j;
+					bestVal = moveVal;
+				}
+			}
+			// console.log(i+" "+j+" "+moveVal);
+			// console.log(row+" "+col);
+			// console.log(bestVal);
+		}
+	}
+	GameSingle('r'+row+'c'+col);
+}
+
+// Minimax Algorithm for AI - Single Player.
+
+function miniMax(level, depth, isMax){
+	//console.log(level,depth);
+	var score = EvaluationSingle(board);
+	if(level > depth && score == 0){
+		return 0;
+	}
+	if(score == 10){
+		return score -level;
+	}
+	if(score == -10){
+		return score + level;
+	}
+	if(NoMovesLeft()){
+		return 0;
+	}
+	if(isMax){
+		var bestVal = -1000;
+		for(var i = 0; i < Size;i++){
+			for(var j = 0;j < Size;j++){
+				if(board[i][j] == '_'){
+					board[i][j] = 'X';
+					var val = miniMax(level + 1 ,depth,false);
+					board[i][j] = '_';
+					bestVal = Math.max(bestVal,val);
+				}
+			}
+		}
+		return bestVal;
+	}else{
+		var bestVal = 1000;
+		for(var i = 0; i < 3;i++){
+			for(var j = 0;j < 3;j++){
+				if(board[i][j] == '_'){
+					board[i][j] = 'O';
+					var val = miniMax(level + 1 ,depth ,true);
+					board[i][j] = '_';
+					bestVal = Math.min(bestVal,val);
+				}
+			}
+		}
+		return bestVal;
+	}
+}
+
