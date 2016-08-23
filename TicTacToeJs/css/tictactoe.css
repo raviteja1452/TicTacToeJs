@@ -333,6 +333,21 @@ a{
     text-decoration: none;
     color:inherit;
 }
+.btn{
+    margin: 20px;
+    border-radius: 6px;
+    padding: 10px;
+    color: royalblue;
+    font-family: monospace;
+    border: 1px solid brown;
+    display: inline-block;
+    cursor:pointer;
+}
+.btn:hover{
+    background-color:royalblue;
+    color:white;
+    border:none;
+}
 /* Main Page Css*/
 
 

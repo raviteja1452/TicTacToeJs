@@ -1,13 +1,20 @@
 // TicTacToe RationalScripts
 
 $(document).ready(function(){
-	$(document).on('click','.tic-item',function(){
+	$(document).on('click','.tic-item-m',function(){
 		if(!Evaluation()){
 			var id = $(this).attr('id');
 			Game(id);
 		}else{
-			ticBoard(Size);
-			TicTacToe();
+			initiateGame(Size,2);
+		}
+	});
+	$(document).on('click','tic-item-s',function(){
+		if(!EvaluationSingle()){
+			var id = $(this).attr('id');
+			GameSinge(id);
+		}else{
+			initiateGame(Size,1);
 		}
 	});
 	$('#ttt').on('click',function(){
@@ -45,50 +52,49 @@ $(document).ready(function(){
 		$('#m5').css('display','inline-block');
 	});
 	$('#s3').on('click',function(){
-		$('.tic-block').show();
-		$('.tic-head').html('Single Player Tic-Tac-Toe');
-		ticBoard(3);
-		TicTacToe();
+		initiateGame(3,1)
 	});
 	$('#s4').on('click',function(){
-		$('.tic-block').show();
-		$('.tic-head').html('Single Player Tic-Tac-Toe');
-		ticBoard(4);
-		TicTacToe();
-		
+		initiateGame(4,1)
 	});
 	$('#s5').on('click',function(){
-		$('.tic-block').show();
-		$('.tic-head').html('Single Player Tic-Tac-Toe');
-		ticBoard(5);
-		TicTacToe();
+		initiateGame(5,1)
 	});
 	$('#m3').on('click',function(){
-		$('.tic-block').show();
-		$('.tic-head').html('Multi Player Tic-Tac-Toe');
-		ticBoard(3);
-		TicTacToe();
+		initiateGame(3,2)
 
 	});
 	$('#m4').on('click',function(){
-		$('.tic-block').show();
-		$('.tic-head').html('Multi Player Tic-Tac-Toe');
-		ticBoard(4);
-		TicTacToe();
+		initiateGame(4,2)
 	});
 	$('#m5').on('click',function(){
-		$('.tic-block').show();
-		$('.tic-head').html('Multi Player Tic-Tac-Toe');
-		ticBoard(5);
-		TicTacToe();
+		initiateGame(5,2)
+	});
+	$('#play-again').on('click',function(){
+		initiateGame(Size,Type);
 	});
 });
 
-// Board Calling creation is done on view as well for evaluation part
-
 var board = 0;
 var Size = 0;
-function ticBoard(size){
+var Type = 0;
+function initiateGame(s,type){
+	Type = type;
+	$('.tic-block').show();
+	var word = '';
+	if(type == 1){
+		word+='Single Player';
+	}else{
+		word+='Multi Player';
+	}
+	$('.tic-head').html(word+' Tic-Tac-Toe');
+	ticBoard(s,type);
+	TicTacToe();
+}
+// Board Calling creation is done on view as well for evaluation part
+
+
+function ticBoard(size,type){
 	Size = size;
 	var content = ''
 	// Creating a board
@@ -97,15 +103,18 @@ function ticBoard(size){
 		content = content+'<div class="tic-row" id="tr'+i+'">'
 		board[i] = new Array(size);
 		for(var j=0;j < size;j++){
-			content = content + '<div class="tic-item" id="r'+i+'c'+j+'"></div>';
+			if(type == 1){
+				content = content + '<div class="tic-item-s" id="r'+i+'c'+j+'"></div>';
+			}else{
+				content = content + '<div class="tic-item-m" id="r'+i+'c'+j+'"></div>';
+			}
 			board[i][j] = '_';
 		}
 		content = content+'</div>'
 	}
 	$('.tic-body').html(content);
 }
-
-// Code for MultiPlayer
+// ---------------------- Common Code -----------------------//
 
 // Tic Tac Toe Start Function 
 var current_player;
@@ -117,26 +126,7 @@ function TicTacToe(){
 	$('.tic-output').css('background-color','white');
 	$('.tic-output').html("Game Started , "+output);
 }
-// Game Functionality
 
-function Game(id){
-	var rno = parseInt(id[1]);
-	var cno = parseInt(id[3]);
-	if(board[rno][cno] == '_'){
-		board[rno][cno] = current_player;
-		$('#'+id).html(current_player);
-		if(current_player == 'X'){
-			$('#'+id).addClass('royal');
-		}
-		if(!GameOver()){
-			swapPlayer();
-		}
-	}else{
-		$('.tic-output').css('background-color','white');
-		var output = current_player+"'s Turn ";
-		$('.tic-output').html(output+"<br/> Insert in Positions where pieces are not inserted");	
-	}
-}
 function swapPlayer(){
 	if(current_player == 'X'){
 		current_player  = 'O';
@@ -147,15 +137,7 @@ function swapPlayer(){
 	$('.tic-output').css('background-color','white');
 	$('.tic-output').html(output);
 }
-// Board Functionality
-function GameOver(){
-	if(Evaluation() == 1){
-		$('.tic-output').css('background-color','green');
-		$('.tic-output').html("You are the Winner");
-	}
-	//console.log(NoMovesLeft());
-	return (Evaluation()||NoMovesLeft());
-}
+
 function NoMovesLeft(){
 	//console.log(Size);
 	for(i = 0 ; i < Size ; i++){
@@ -169,6 +151,13 @@ function NoMovesLeft(){
 	$('.tic-output').html("Pchh, No moves left :(");
 	return 1;
 }
+// Game Functionality
+
+
+
+// ----------------------- Code for MultiPlayer -------------------- //
+
+
 function Evaluation(){
 	// Row Checking
 	//console.log("Evaluate :"+Size);
@@ -226,5 +215,142 @@ function Evaluation(){
 	return 0;
 }
 
+function Game(id){
+	var rno = parseInt(id[1]);
+	var cno = parseInt(id[3]);
+	if(board[rno][cno] == '_'){
+		board[rno][cno] = current_player;
+		$('#'+id).html(current_player);
+		if(current_player == 'X'){
+			$('#'+id).addClass('royal');
+		}
+		if(!GameOver()){
+			swapPlayer();
+		}
+	}else{
+		$('.tic-output').css('background-color','white');
+		var output = current_player+"'s Turn ";
+		$('.tic-output').html(output+"<br/> Already Filled");	
+	}
+}
 
 
+
+
+// Board Functionality
+function GameOver(){
+	if(Evaluation() == 1){
+		$('.tic-output').css('background-color','#d3f18e');
+		$('.tic-output').html(current_player+" is the Winner :) ");
+	}
+	//console.log(NoMovesLeft());
+	return (Evaluation()||NoMovesLeft());
+}
+
+// ------------------- Code for the Single Player ------------------- //
+
+// Evaluation With Scores
+
+function EvaluationSingle(){
+	// Row Checking
+	//console.log("Evaluate :"+Size);
+	for(i = 0;i < Size ;i++){
+		if(board[i][0] != '_'){
+			var j = 1;
+			for(j = 1 ; j < Size ; j++){
+				if(board[i][j] != board[i][j-1]){
+					break;
+				}
+			}
+			if(j == Size){
+				if(board[i][0] == 'X'){
+					return 10;
+				}else{
+					return -10;
+				}
+			}
+		}
+	}
+	// Coloumn Checking
+	for(i = 0;i < Size ;i++){
+		if(board[0][i] != '_'){
+			var j = 1;
+			for(j = 1 ; j < Size ; j++){
+				if(board[j][i] != board[j-1][i]){
+					break;
+				}
+			}
+			if(j == Size){
+				if(board[0][i] == 'X'){
+					return 10;
+				}else{
+					return -10;
+				}
+			}
+		}
+	}
+	// Diagonal 1 
+	if(board[0][0]!='_'){
+		var i = 0;
+		for(i = 1; i< Size; i++){
+			if(board[i][i] != board[i-1][i-1]){
+				break;
+			}
+		}
+		if(i == Size){
+			if(board[0][0] == 'X'){
+				return 10;
+			}else{
+				return -10;
+			}
+		}
+	}
+	// Diagonal 2
+	if(board[0][Size-1]!='_'){
+		var i = 0;
+		for(i = 1; i < Size; i++){
+			if(board[i][Size-1 - i] != board[i-1][Size - i]){
+				break;
+			}
+		}
+		if(i == Size){
+			if(board[0][size -1 ] == 'X'){
+				return 10;
+			}else{
+				return -10;
+			}
+		}
+	}
+	return 0;
+}
+
+function GameSingle(id){
+	var rno = parseInt(id[1]);
+	var cno = parseInt(id[3]);
+	if(board[rno][cno] == '_'){
+		board[rno][cno] = current_player;
+		if(current_player == 'X'){
+			$('#'+id).addClass('royal');
+		}
+		if(!GameOverSingle()){
+			swapPlayer();
+		}
+	}else{
+		$('.tic-output').css('background-color','white');
+		var output = current_player+"'s Turn ";
+		$('.tic-output').html(output+"<br/> Already Filled");
+	}
+}
+
+
+function GameOverSingle(){
+	if(EvaluationSingle() == 10){
+		$('.tic-output').css('background-color','#d3f18e');
+		$('.tic-output').html("You are the Winner :) ");
+	}else if(EvaluationSingle() == -10){
+		$('.tic-output').css('background-color','#efc1d1');
+		$('.tic-output').html("Computer is the Winner :) ");
+	}
+	//console.log(NoMovesLeft());
+	return (EvaluationSingle()||NoMovesLeft());
+}
